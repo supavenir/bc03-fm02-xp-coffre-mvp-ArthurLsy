@@ -12,8 +12,14 @@ public class Chest {
     public Chest() {
     }
 
-    public static int getValue() {
-        return 1;
+    public int getValue() {
+        int totalValue = 0;
+
+        for (Item item : this.items) {
+            totalValue += item.getValue();
+        }
+
+        return totalValue;
     }
 
     public static boolean isLocked() {

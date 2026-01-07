@@ -11,6 +11,10 @@ import java.util.List;
 
 public class ItemTest extends TestCase {
 
-
+    @Test
+    public void testGetValueItem(){
+        Item item = new Item("potion", 10);
+        assertEquals(item.getValue(), 10);
+    }
 
 }

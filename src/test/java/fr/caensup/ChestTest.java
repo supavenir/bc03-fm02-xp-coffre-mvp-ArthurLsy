@@ -12,7 +12,7 @@ public class ChestTest extends TestCase {
     @Test
 
     public void testListExistingChest() {
-        Item i1 = new Item("Potion");
+        Item i1 = new Item("Potion", 10);
         Chest c1 = new Chest();
         c1.add(i1);
         assertEquals(List.of(i1), c1.getItems());
@@ -22,7 +22,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testAddExistingObject() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10);
         chest.add(item);
 
         List<Item> items = chest.getItems();
@@ -34,7 +34,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testRemoveExistingObject() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10);
         chest.add(item);
 
         chest.remove("Potion");
@@ -47,8 +47,8 @@ public class ChestTest extends TestCase {
     @Test
     public void testRemoveInexistingObject() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
-        Item item2 = new Item("Potion2");
+        Item item = new Item("Potion", 10);
+        Item item2 = new Item("Potion2", 10);
         chest.add(item);
         chest.add(item2);
 
@@ -62,7 +62,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testDoubleItemInChest() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10);
         chest.add(item);
         chest.add(item);
         assertEquals(chest.getItemCount(), 1);
@@ -71,7 +71,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testGetWeight() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10);
         chest.add(item);
         assertEquals(chest.getWeight(), 1);
     }
@@ -79,9 +79,12 @@ public class ChestTest extends TestCase {
     @Test
     public void testGetValueChest() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10);
+        Item item1 = new Item("Potions", 20);
         chest.add(item);
-        assertEquals(Chest.getValue(), 1);
+        chest.add(item1);
+
+        assertEquals(chest.getValue(), 30);
     }
 
     @Test
@@ -95,7 +98,7 @@ public class ChestTest extends TestCase {
         Chest chest2 = new Chest();
         Chest chest1 = new Chest();
         assertEquals(chest1, chest2);
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10);
         chest1.add(item);
         chest1.transfer(item, chest2);
 
