@@ -48,12 +48,14 @@ public class ChestTest extends TestCase {
     public void testRemoveInexistingObject() {
         Chest chest = new Chest();
         Item item = new Item("Potion");
+        Item item2 = new Item("Potion2");
         chest.add(item);
+        chest.add(item2);
 
         chest.remove("Epee");
 
         List<Item> items = chest.getItems();
-        assertEquals(1, items.size());
+        assertEquals(2, items.size());
         assertTrue(items.contains(item));
     }
 }

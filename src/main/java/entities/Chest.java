@@ -13,7 +13,6 @@ public class Chest {
 
     }
 
-
     public List<Item> getItems() {
         return items;
     }
@@ -23,7 +22,8 @@ public class Chest {
         this.items.add(item);
     }
 
-    public void remove(String potion) {
+    public void remove(String name) {
+        items.removeIf(item -> item.getName().equals(name));
     }
 }
 
