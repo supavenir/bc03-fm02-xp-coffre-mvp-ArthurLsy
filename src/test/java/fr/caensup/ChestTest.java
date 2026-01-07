@@ -1,5 +1,7 @@
 package fr.caensup;
 
+import entities.Chest;
+import entities.Item;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +15,9 @@ public class ChestTest extends TestCase {
         Item item = new Item("Potion");
         chest.add(item);
 
-        List<Item> items = chest.list();
-        assertFalse(items.isEmpty(), "Chest is empty");
-        assertTrue(items.contains(item), "Item was added");
+        List<Item> items = chest.getItems();
+        assertFalse(items.isEmpty());
+        assertTrue(items.contains(item));
     }
 
 
@@ -27,9 +29,9 @@ public class ChestTest extends TestCase {
 
         chest.remove("Potion");
 
-        List<Item> items = chest.list();
-        assertFalse(items.contains(item), "Item is already here");
-        assertTrue(items.isEmpty(), "Chest is empty");
+        List<Item> items = chest.getItems();
+        assertFalse(items.contains(item));
+        assertTrue(items.isEmpty());
     }
 
     @Test
@@ -40,7 +42,7 @@ public class ChestTest extends TestCase {
 
         chest.remove("Epee");
 
-        List<Item> items = chest.list();
+        List<Item> items = chest.getItems();
         assertEquals(1, items.size());
         assertTrue(items.contains(item));
     }
