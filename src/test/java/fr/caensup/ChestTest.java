@@ -99,9 +99,9 @@ public class ChestTest extends TestCase {
         chest1.add(item);
         chest1.transfer(item, chest2);
 
-        assertEquals(chest1.getItemCount(), 0);
+        assertEquals(0, chest1.getItemCount());
 
-        assertEquals(chest2.getItemCount(), 1);
+        assertEquals(1, chest2.getItemCount());
     }
 
 
