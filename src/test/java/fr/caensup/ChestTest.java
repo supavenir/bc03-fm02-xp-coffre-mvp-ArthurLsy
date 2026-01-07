@@ -58,4 +58,52 @@ public class ChestTest extends TestCase {
         assertEquals(2, items.size());
         assertTrue(items.contains(item));
     }
+
+    @Test
+    public void testDoubleItemInChest() {
+        Chest chest = new Chest();
+        Item item = new Item("Potion");
+        chest.add(item);
+        chest.add(item);
+        assertEquals(chest.getItemCount(), 1);
+    }
+
+    @Test
+    public void testGetWeight() {
+        Chest chest = new Chest();
+        Item item = new Item("Potion");
+        chest.add(item);
+        assertEquals(chest.getWeight(), 1);
+    }
+
+    @Test
+    public void testGetValueChest() {
+        Chest chest = new Chest();
+        Item item = new Item("Potion");
+        chest.add(item);
+        assertEquals(Chest.getValue(), 1);
+    }
+
+    @Test
+    public void testLockedTest() {
+        Chest chest = new Chest();
+        assertEquals(Chest.isLocked(), false);
+    }
+
+    @Test
+    public void testTransfer() {
+        Chest chest2 = new Chest();
+        Chest chest1 = new Chest();
+        assertEquals(chest1, chest2);
+        Item item = new Item("Potion");
+        chest1.add(item);
+        chest1.transfer(item, chest2);
+
+        assertEquals(chest1.getItemCount(), 0);
+
+        assertEquals(chest2.getItemCount(), 1);
+    }
+
+
+
 }
