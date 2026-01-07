@@ -2,6 +2,7 @@ package fr.caensup;
 
 import entities.Chest;
 import entities.Item;
+import exceptions.DuplicateItemException;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class ChestTest extends TestCase {
 
     @Test
 
-    public void testListExistingChest() {
+    public void testListExistingChest() throws DuplicateItemException {
         Item i1 = new Item("Potion", 10, 5);
         Chest c1 = new Chest();
         c1.add(i1);
@@ -22,7 +23,7 @@ public class ChestTest extends TestCase {
 
 
     @Test
-    public void testAddExistingObject() {
+    public void testAddExistingObject() throws DuplicateItemException {
         Chest chest = new Chest();
         Item item = new Item("Potion", 10, 5);
         chest.add(item);
@@ -34,7 +35,7 @@ public class ChestTest extends TestCase {
 
 
     @Test
-    public void testRemoveExistingObject() {
+    public void testRemoveExistingObject() throws DuplicateItemException {
         Chest chest = new Chest();
         Item item = new Item("Potion", 10, 5);
         chest.add(item);
@@ -47,7 +48,7 @@ public class ChestTest extends TestCase {
     }
 
     @Test
-    public void testRemoveInexistingObject() {
+    public void testRemoveInexistingObject() throws DuplicateItemException {
         Chest chest = new Chest();
         Item item = new Item("Potion", 10, 5);
         Item item2 = new Item("Potion2", 10, 5);
@@ -62,27 +63,25 @@ public class ChestTest extends TestCase {
     }
 
     @Test
-    public void testDoubleItemInChest() {
+    public void testDoubleItemInChest() throws DuplicateItemException {
         Chest chest = new Chest();
         Item item = new Item("Potion", 10, 5);
         chest.add(item);
         chest.add(item);
         assertEquals(chest.getItemCount(), 1);
-        assertThrows()
     }
 
     @Test
-    public void testGetWeight() {
+    public void testGetWeight() throws DuplicateItemException {
         Chest chest = new Chest();
         Item item = new Item("Potion", 10, 5);
         // Test si coffre vide le poids doit être null
         assertNull(chest.getWeight());
-        Item item = new Item("Potion", 2); // 2 le poids en parametre qui peut-être par default fixé dans le constructeur
         chest.add(item);
         assertEquals(item.getWeight(), chest.getWeight());
     }
 
-    public void testGetTotalValue(){
+    public void testGetTotalValue() throws DuplicateItemException {
         Chest chest = new Chest();
         Item i1 = new Item("Potion", 2, 10); // 2 = poids , 10 = valeur
         Item i2 = new Item("Potion", 2, 15);
@@ -93,15 +92,13 @@ public class ChestTest extends TestCase {
     }
 
     @Test
-    public void testGetValueChest() {
+    public void testGetValueChest() throws DuplicateItemException {
         Chest chest = new Chest();
         Item item = new Item("Potion", 10, 5);
         Item item1 = new Item("Potions", 20, 5);
         chest.add(item);
         chest.add(item1);
-
-        assertEquals(chest.getValue(), 30);
-        assertEquals(Chest.getValue(), item.getValue());
+        assertEquals(30, chest.getValue());
     }
 
     @Test
@@ -116,13 +113,13 @@ public class ChestTest extends TestCase {
     }
 
     @Test
-    public void testTransfer() {
+    public void testTransfer() throws DuplicateItemException {
         Chest chest2 = new Chest();
         Chest chest1 = new Chest();
         assertEquals(chest1, chest2);
         Item item = new Item("Potion", 10, 5);
         chest1.add(item);
-        chest1.transfer(item, chest2);
+        chest1.transfer("Potion", chest2);
 
         assertEquals(0, chest1.getItemCount());
 
