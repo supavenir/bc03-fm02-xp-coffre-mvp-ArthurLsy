@@ -45,12 +45,13 @@ public class Chest {
     }
 
     public void add(Item item) {
-        this.items.add(item);
-
+        if (this.items.stream().noneMatch(i -> i.getName().equals(item.getName()))) {
+            this.items.add(item);
+        }
     }
 
     public void remove(String name) {
-        items.removeIf(item -> item.getName().equals(name));
+        this.items.removeIf(item -> item.getName().equals(name));
     }
 
     public void transfer(Item item, Chest chest2) {
