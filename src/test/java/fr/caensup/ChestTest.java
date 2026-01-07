@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class ChestTest extends TestCase {
 
     @Test
@@ -66,14 +68,26 @@ public class ChestTest extends TestCase {
         chest.add(item);
         chest.add(item);
         assertEquals(chest.getItemCount(), 1);
+        assertThrows()
     }
 
     @Test
     public void testGetWeight() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        // Test si coffre vide le poids doit être null
+        assertNull(chest.getWeight());
+        Item item = new Item("Potion", 2); // 2 le poids en parametre qui peut-être par default fixé dans le constructeur
         chest.add(item);
-        assertEquals(chest.getWeight(), 1);
+        assertEquals(item.getWeight(), chest.getWeight());
+    }
+
+    public void testGetTotalValue(){
+        Chest chest = new Chest();
+        Item i1 = new Item("Potion", 2, 10); // 2 = poids , 10 = valeur
+        Item i2 = new Item("Potion", 2, 15);
+        chest.add(i1);
+        chest.add(i2);
+        assertEquals(25, chest.getValue());
     }
 
     @Test
@@ -81,13 +95,18 @@ public class ChestTest extends TestCase {
         Chest chest = new Chest();
         Item item = new Item("Potion");
         chest.add(item);
-        assertEquals(Chest.getValue(), 1);
+        assertEquals(Chest.getValue(), item.getValue());
     }
 
     @Test
     public void testLockedTest() {
         Chest chest = new Chest();
-        assertEquals(Chest.isLocked(), false);
+        assertEquals(chest.isLocked(), true);
+        Item item = new Item("Potion");
+        chest.add(item);
+        assertEquals(true, chest.isLocked());
+        assertEquals(null, chest.getWeight()); // a adapter en fonction de getWeight soit 0 soit null
+
     }
 
     @Test
@@ -97,11 +116,12 @@ public class ChestTest extends TestCase {
         assertEquals(chest1, chest2);
         Item item = new Item("Potion");
         chest1.add(item);
-        chest1.transfer(item, chest2);
-
-        assertEquals(chest1.getItemCount(), 0);
-
-        assertEquals(chest2.getItemCount(), 1);
+        chest1.transfer("Potion", chest2);
+        // ici on manque le cas ou "Potion" existe deja dans chest2, dans ce cas le transfere est annuler
+        // verifier que item 'potion' n'est pas dans chest2, ensuite vérifier les sizes des coffres :
+        assertEquals(false, chest2.isDoubled("Potion"));
+        assertEquals(0, chest1.getItemCount());
+        assertEquals(1, chest2.getItemCount());
     }
 
 

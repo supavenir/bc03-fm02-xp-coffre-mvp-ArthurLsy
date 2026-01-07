@@ -1,5 +1,7 @@
 package entities;
 
+import exceptions.DuplicateItemException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +46,7 @@ public class Chest {
     public void setItems(List<Item> items) {
     }
 
-    public void add(Item item) {
+    public void add(Item item) throws DuplicateItemException {
         this.items.add(item);
 
     }
@@ -53,7 +55,11 @@ public class Chest {
         items.removeIf(item -> item.getName().equals(name));
     }
 
-    public void transfer(Item item, Chest chest2) {
+    public void transfer(String name, Chest chest2give) {
+    }
+
+    public boolean isDoubled(String name) {
+        return false;
     }
 }
 
