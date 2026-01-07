@@ -4,29 +4,27 @@ import java.util.UUID;
 
 public class Item {
     private final UUID id = UUID.randomUUID();
+    private final int value;
+    private final int weight;
     private String name;
-    private int weight;
-    private int value;
 
-    public Item(String name) {
+    public Item(String name, int value, int weight) {
         this.name = name;
-    }
-    public Item(String name, int weight, int value) {
-        this.name = name;
-        this.weight = weight;
         this.value = value;
-
+        this.weight = weight;
     }
 
     public String getName(){
         return this.name;
     }
 
-    public int getValue() {
-        return 1;
+    public int getValue(){
+        return this.value;
     }
 
-    public int getWeight() {
-        return 1;
+    public int getWeight(){
+        return this.weight;
     }
+
+
 }

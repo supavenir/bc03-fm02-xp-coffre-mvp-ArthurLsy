@@ -14,18 +14,30 @@ public class Chest {
     public Chest() {
     }
 
-    public static int getValue() {
-        return 1;
+    public int getValue() {
+        int totalValue = 0;
+
+        for (Item item : this.items) {
+            totalValue += item.getValue();
+        }
+
+        return totalValue;
+    }
+
+    public int getWeight() {
+        int totalWeight = 0;
+
+        for (Item item : this.items) {
+            totalWeight += item.getWeight();
+        }
+
+        return totalWeight;
     }
 
     public static boolean isLocked() {
         return false;
     }
 
-
-    public int getWeight() {
-        return 1;
-    }
 
     public List<Item> getItems() {
         return items;
@@ -47,12 +59,13 @@ public class Chest {
     }
 
     public void add(Item item) throws DuplicateItemException {
-        this.items.add(item);
-
+        if (this.items.stream().noneMatch(i -> i.getName().equals(item.getName()))) {
+            this.items.add(item);
+        }
     }
 
     public void remove(String name) {
-        items.removeIf(item -> item.getName().equals(name));
+        this.items.removeIf(item -> item.getName().equals(name));
     }
 
     public void transfer(String name, Chest chest2give) {

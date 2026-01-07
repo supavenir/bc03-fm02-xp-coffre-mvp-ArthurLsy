@@ -14,7 +14,7 @@ public class ChestTest extends TestCase {
     @Test
 
     public void testListExistingChest() {
-        Item i1 = new Item("Potion");
+        Item i1 = new Item("Potion", 10, 5);
         Chest c1 = new Chest();
         c1.add(i1);
         assertEquals(List.of(i1), c1.getItems());
@@ -24,7 +24,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testAddExistingObject() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10, 5);
         chest.add(item);
 
         List<Item> items = chest.getItems();
@@ -36,7 +36,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testRemoveExistingObject() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10, 5);
         chest.add(item);
 
         chest.remove("Potion");
@@ -49,8 +49,8 @@ public class ChestTest extends TestCase {
     @Test
     public void testRemoveInexistingObject() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
-        Item item2 = new Item("Potion2");
+        Item item = new Item("Potion", 10, 5);
+        Item item2 = new Item("Potion2", 10, 5);
         chest.add(item);
         chest.add(item2);
 
@@ -64,7 +64,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testDoubleItemInChest() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10, 5);
         chest.add(item);
         chest.add(item);
         assertEquals(chest.getItemCount(), 1);
@@ -74,6 +74,7 @@ public class ChestTest extends TestCase {
     @Test
     public void testGetWeight() {
         Chest chest = new Chest();
+        Item item = new Item("Potion", 10, 5);
         // Test si coffre vide le poids doit être null
         assertNull(chest.getWeight());
         Item item = new Item("Potion", 2); // 2 le poids en parametre qui peut-être par default fixé dans le constructeur
@@ -88,13 +89,18 @@ public class ChestTest extends TestCase {
         chest.add(i1);
         chest.add(i2);
         assertEquals(25, chest.getValue());
+        assertEquals(chest.getWeight(), 5);
     }
 
     @Test
     public void testGetValueChest() {
         Chest chest = new Chest();
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10, 5);
+        Item item1 = new Item("Potions", 20, 5);
         chest.add(item);
+        chest.add(item1);
+
+        assertEquals(chest.getValue(), 30);
         assertEquals(Chest.getValue(), item.getValue());
     }
 
@@ -114,8 +120,13 @@ public class ChestTest extends TestCase {
         Chest chest2 = new Chest();
         Chest chest1 = new Chest();
         assertEquals(chest1, chest2);
-        Item item = new Item("Potion");
+        Item item = new Item("Potion", 10, 5);
         chest1.add(item);
+        chest1.transfer(item, chest2);
+
+        assertEquals(0, chest1.getItemCount());
+
+        assertEquals(1, chest2.getItemCount());
         chest1.transfer("Potion", chest2);
         // ici on manque le cas ou "Potion" existe deja dans chest2, dans ce cas le transfere est annuler
         // verifier que item 'potion' n'est pas dans chest2, ensuite vérifier les sizes des coffres :
