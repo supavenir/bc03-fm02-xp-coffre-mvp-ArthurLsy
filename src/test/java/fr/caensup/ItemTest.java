@@ -23,4 +23,10 @@ public class ItemTest extends TestCase {
         assertEquals(item.getWeight(), 5);
     }
 
+    @Test
+    public void testItemRarity() {
+        Item item = new Item("Potion", 10, 5, true);
+        assertEquals(item.getValue(), 20);
+    }
+
 }

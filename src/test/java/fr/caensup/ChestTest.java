@@ -86,6 +86,16 @@ public class ChestTest extends TestCase {
 
         assertEquals(chest.getValue(), 30);
     }
+    @Test
+    public void testGetValueChestWithRareItem() {
+        Chest chest = new Chest();
+        Item item = new Item("Potion", 10, 5);
+        Item item1 = new Item("Potions", 20, 5, true);
+        chest.add(item);
+        chest.add(item1);
+
+        assertEquals(chest.getValue(), 50);
+    }
 
     @Test
     public void testLockedTest() {
