@@ -9,15 +9,17 @@ public class Chest {
    private int weight;
    private List<Item> items =  new ArrayList<>();
 
-    public Chest(Item i1 ) {
+    public Chest(Item i1) {
         this.setItem(i1);
     }
 
 
-    public int  getWeight() {
-      return weight;
-   }
-   public void setWeight(int weight) {}
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+    }
 
     public List<Item> getItems() {
         return items;
@@ -28,6 +30,12 @@ public class Chest {
     }
 
     public void setItems(List<Item> items) {
+    }
+
+    public void add(Item item) {
+    }
+
+    public void remove(String potion) {
     }
 }
 
