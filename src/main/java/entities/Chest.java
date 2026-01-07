@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Chest {
    private UUID id;
    private int weight;
-   private List<Item> items =  new ArrayList<>();
+   private final List<Item> items =  new ArrayList<>();
 
     public Chest(Item i1) {
         this.setItem(i1);
