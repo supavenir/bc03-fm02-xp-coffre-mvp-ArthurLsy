@@ -8,10 +8,14 @@ public class Item {
     private final int weight;
     private String name;
 
-    public Item(String name, int value, int weight) {
+    public Item(String name, int value, int weight, boolean rare) {
         this.name = name;
-        this.value = value;
+        this.value = rare ? value * 2 : value;
         this.weight = weight;
+    }
+
+    public Item(String name, int value, int weight) {
+        this(name, value, weight, false);
     }
 
     public String getName(){
