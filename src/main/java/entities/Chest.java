@@ -14,23 +14,10 @@ public class Chest {
     }
 
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-    }
-
     public List<Item> getItems() {
         return items;
     }
 
-    public void setItem(Item i1) {
-        this.items.add(i1);
-    }
-
-    public void setItems(List<Item> items) {
-    }
 
     public void add(Item item) {
         this.items.add(item);
