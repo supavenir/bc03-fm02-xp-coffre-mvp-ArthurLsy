@@ -19,7 +19,7 @@ public class Chest {
     public static boolean isLocked() {
         return false;
     }
-    
+
 
     public int getWeight() {
         return 1;
@@ -51,6 +51,9 @@ public class Chest {
     }
 
     public void remove(String potion) {
+    }
+
+    public void transfer(Item item, Chest chest2) {
     }
 }
 
