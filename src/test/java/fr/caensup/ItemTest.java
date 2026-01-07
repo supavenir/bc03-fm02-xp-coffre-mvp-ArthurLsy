@@ -13,8 +13,14 @@ public class ItemTest extends TestCase {
 
     @Test
     public void testGetValueItem(){
-        Item item = new Item("potion", 10);
+        Item item = new Item("potion", 10, 5);
         assertEquals(item.getValue(), 10);
+    }
+
+    @Test
+    public void testGetWeightItem(){
+        Item item = new Item("potion", 10, 5);
+        assertEquals(item.getWeight(), 5);
     }
 
 }

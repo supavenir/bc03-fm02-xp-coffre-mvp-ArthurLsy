@@ -22,14 +22,20 @@ public class Chest {
         return totalValue;
     }
 
+    public int getWeight() {
+        int totalWeight = 0;
+
+        for (Item item : this.items) {
+            totalWeight += item.getWeight();
+        }
+
+        return totalWeight;
+    }
+
     public static boolean isLocked() {
         return false;
     }
 
-
-    public int getWeight() {
-        return 1;
-    }
 
     public List<Item> getItems() {
         return items;
