@@ -8,7 +8,6 @@ public class Chest {
    private UUID id;
    private int weight;
    private final List<Item> items =  new ArrayList<>();
-   private List<Item> items =  new ArrayList<>();
 
     public Chest() {
     }
@@ -20,8 +19,7 @@ public class Chest {
     public static boolean isLocked() {
         return false;
     }
-
-    public Chest() {
+    
 
     public int getWeight() {
         return 1;
