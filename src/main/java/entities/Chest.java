@@ -9,8 +9,8 @@ public class Chest {
    private int weight;
    private final List<Item> items =  new ArrayList<>();
 
-    public Chest(Item i1) {
-        this.setItem(i1);
+    public Chest() {
+
     }
 
 
@@ -33,6 +33,7 @@ public class Chest {
     }
 
     public void add(Item item) {
+        this.items.add(item);
     }
 
     public void remove(String potion) {
