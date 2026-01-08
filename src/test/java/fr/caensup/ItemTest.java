@@ -11,22 +11,21 @@ import java.util.List;
 
 public class ItemTest extends TestCase {
 
-    @Test
     public void testGetValueItem(){
         Item item = new Item("potion", 10, 5);
-        assertEquals(item.getValue(), 10);
+        assertEquals(10, item.getValue());
     }
 
-    @Test
+
     public void testGetWeightItem(){
         Item item = new Item("potion", 10, 5);
-        assertEquals(item.getWeight(), 5);
+        assertEquals(5, item.getWeight());
     }
 
-    @Test
+
     public void testItemRarity() {
         Item item = new Item("Potion", 10, 5, true);
-        assertEquals(item.getValue(), 20);
+        assertEquals(20, item.getValue());
     }
 
 }

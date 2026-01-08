@@ -1,7 +1,7 @@
 package exceptions;
 
-public class DuplicateItemException extends Exception {
-    public DuplicateItemException(String itemName) {
-        super("L'item '" + itemName + "' existe déjà dans le coffre");
+public class DuplicateItemException extends ItemException {
+    public DuplicateItemException() {
+        super("L'item que vous tentez d'ajouter existe deja dans le coffre.");
     }
 }
