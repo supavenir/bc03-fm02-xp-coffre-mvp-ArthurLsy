@@ -29,6 +29,12 @@ public class Chest {
         return totalValue;
     }
 
+    public int getLimit(){
+        return this.limit;
+    }
+    public void setLimit(int limit){
+        this.limit = limit;
+    }
     public int getWeight() {
         int totalWeight = 0;
         if (items.isEmpty()) { return totalWeight; }
@@ -66,10 +72,13 @@ public class Chest {
     }
 
     public void setItems(List<Item> items) {
+
     }
 
     public void add(Item item) throws Exception {
-        this.security(item);
+        if (isLocked()) throw new LockChestException();
+        if (this.limit < this.getWeight() + item.getWeight()) throw new CapacityChestException(this.limit);
+        if (this.isDouble(item.getName())) throw new DuplicateItemException();
         this.items.add(item);
 
     }
@@ -79,7 +88,9 @@ public class Chest {
     }
 
     public void transfer(String name, Chest givenChest) throws Exception {
-        this.security(getItem(name));
+        if (isLocked()) throw new LockChestException();
+        if (givenChest.getLimit() < this.getWeight() + getItem(name).getWeight()) throw new CapacityChestException(givenChest.getLimit());
+        if (givenChest.isDouble(name)) throw new DuplicateItemException();
 
         Item toTransfer = this.getItem(name);
         if(toTransfer != null){
@@ -110,12 +121,6 @@ public class Chest {
         return this.items.stream().filter(i -> i.getName().equals(name)).findFirst().orElse(null);
     }
 
-    public void security(Item item) throws Exception {
-        if (isLocked()) throw new LockChestException();
-        if (this.limit < this.getWeight() + item.getWeight()) throw new CapacityChestException(this.limit);
-        if (this.isDouble(item.getName())) throw new DuplicateItemException();
-
-    }
 
     public void sortByValue(String order) {
         this.items.sort(new Comparator<Item>() {

@@ -167,15 +167,20 @@ public class ChestTest extends TestCase {
         Item itemA = new Item("Potion", 10, 5);
         Item itemB = new Item("Baguette", 2, 5);
         Item itemC = new Item("Tapis", 40, 5);
+        Item itemD = new Item("Serviette", 4, 5);
+        Item itemE = new Item("Piece", 4, 5, true);
         chest.add(itemA);
         chest.add(itemB);
         chest.add(itemC);
+        chest.add(itemD);
+        chest.add(itemE);
         chest.sortByValue("ascending");
 
-        assertTrue(chest.getItems().get(0).getValue() < chest.getItems().get(1).getValue());
-        assertTrue(chest.getItems().get(1).getValue() < chest.getItems().get(2).getValue());
-        assertTrue(chest.getItems().get(0).getValue() < chest.getItems().get(2).getValue());
-
+        assertEquals(2, chest.getItems().get(0).getValue());
+        assertEquals(4, chest.getItems().get(1).getValue());
+        assertEquals(8, chest.getItems().get(2).getValue());
+        assertEquals(10, chest.getItems().get(3).getValue());
+        assertEquals(40, chest.getItems().get(4).getValue());
 
     }
 
@@ -184,14 +189,20 @@ public class ChestTest extends TestCase {
         Item itemA = new Item("Potion", 10, 5);
         Item itemB = new Item("Baguette", 2, 5);
         Item itemC = new Item("Tapis", 40, 5);
+        Item itemD = new Item("Raclette", 10, 5, true);
+        Item itemE = new Item("Biberon", 12, 5);
         chest.add(itemA);
         chest.add(itemB);
         chest.add(itemC);
+        chest.add(itemD);
+        chest.add(itemE);
         chest.sortByValue("descending");
 
-        assertTrue(chest.getItems().get(0).getValue() > chest.getItems().get(1).getValue());
-        assertTrue(chest.getItems().get(1).getValue() > chest.getItems().get(2).getValue());
-        assertTrue(chest.getItems().get(0).getValue() > chest.getItems().get(2).getValue());
+        assertEquals(40, chest.getItems().get(0).getValue());
+        assertEquals(20, chest.getItems().get(1).getValue());
+        assertEquals(12, chest.getItems().get(2).getValue());
+        assertEquals(10, chest.getItems().get(3).getValue());
+        assertEquals(2, chest.getItems().get(4).getValue());
 
     }
 
