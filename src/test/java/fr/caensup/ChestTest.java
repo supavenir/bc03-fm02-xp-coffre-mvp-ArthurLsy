@@ -162,6 +162,101 @@ public class ChestTest extends TestCase {
         });
     }
 
+    public void testSortByValueAsc() throws Exception {
+        Chest chest = new Chest();
+        Item itemA = new Item("Potion", 10, 5);
+        Item itemB = new Item("Baguette", 2, 5);
+        Item itemC = new Item("Tapis", 40, 5);
+        chest.add(itemA);
+        chest.add(itemB);
+        chest.add(itemC);
+        chest.sortByValue("ascending");
 
+        assertTrue(chest.getItems().get(0).getValue() < chest.getItems().get(1).getValue());
+        assertTrue(chest.getItems().get(1).getValue() < chest.getItems().get(2).getValue());
+        assertTrue(chest.getItems().get(0).getValue() < chest.getItems().get(2).getValue());
+
+
+    }
+
+    public void testSortByValueDesc() throws Exception {
+        Chest chest = new Chest();
+        Item itemA = new Item("Potion", 10, 5);
+        Item itemB = new Item("Baguette", 2, 5);
+        Item itemC = new Item("Tapis", 40, 5);
+        chest.add(itemA);
+        chest.add(itemB);
+        chest.add(itemC);
+        chest.sortByValue("descending");
+
+        assertTrue(chest.getItems().get(0).getValue() > chest.getItems().get(1).getValue());
+        assertTrue(chest.getItems().get(1).getValue() > chest.getItems().get(2).getValue());
+        assertTrue(chest.getItems().get(0).getValue() > chest.getItems().get(2).getValue());
+
+    }
+
+    public void testSortByWeightAsc() throws Exception {
+        Chest chest = new Chest();
+        Item itemA = new Item("Potion", 1, 10);
+        Item itemB = new Item("Baguette", 1, 2);
+        Item itemC = new Item("Tapis", 1, 40);
+        chest.add(itemA);
+        chest.add(itemB);
+        chest.add(itemC);
+        chest.sortByWeight("ascending");
+
+        assertEquals(2, chest.getItems().get(0).getWeight());
+        assertEquals(10, chest.getItems().get(1).getWeight());
+        assertEquals(40, chest.getItems().get(2).getWeight());
+
+    }
+
+    public void testSortByWeightDesc() throws Exception {
+        Chest chest = new Chest();
+        Item itemA = new Item("Potion", 1, 10);
+        Item itemB = new Item("Baguette", 1, 2);
+        Item itemC = new Item("Tapis", 1, 40);
+        chest.add(itemA);
+        chest.add(itemB);
+        chest.add(itemC);
+        chest.sortByWeight("descending");
+
+        assertEquals(2, chest.getItems().get(2).getWeight());
+        assertEquals(10, chest.getItems().get(1).getWeight());
+        assertEquals(40, chest.getItems().get(0).getWeight());
+
+    }
+
+
+    public void testSortByNameAsc() throws Exception {
+        Chest  chest = new Chest();
+        Item item1 = new Item("Zebra");
+        Item item2 = new Item("Apple");
+        Item item3 = new Item("Mango");
+        chest.add(item1);
+        chest.add(item2);
+        chest.add(item3);
+        chest.sortByName("ascending");
+
+        assertEquals("Apple", chest.getItems().get(0).getName());
+        assertEquals("Mango", chest.getItems().get(1).getName());
+        assertEquals("Zebra", chest.getItems().get(2).getName());
+    }
+
+    public void testSortByNameDesc() throws Exception {
+        Chest  chest = new Chest();
+        Item item1 = new Item("Zebra");
+        Item item2 = new Item("Apple");
+        Item item3 = new Item("Mango");
+        chest.add(item1);
+        chest.add(item2);
+        chest.add(item3);
+        chest.sortByName("descending");
+
+        assertEquals("Zebra", chest.getItems().get(0).getName());
+        assertEquals("Mango", chest.getItems().get(1).getName());
+        assertEquals("Apple", chest.getItems().get(2).getName());
+
+    }
 
 }

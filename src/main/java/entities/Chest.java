@@ -5,9 +5,8 @@ import exceptions.DuplicateItemException;
 import exceptions.LockChestException;
 import exceptions.NotFoundItemException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Chest {
    private UUID id;
@@ -116,6 +115,45 @@ public class Chest {
         if (this.limit < this.getWeight() + item.getWeight()) throw new CapacityChestException(this.limit);
         if (this.isDouble(item.getName())) throw new DuplicateItemException();
 
+    }
+
+    public void sortByValue(String order) {
+        this.items.sort(new Comparator<Item>() {
+            @Override
+            public int compare(Item p1, Item p2) {
+                if (order.equals("ascending")) {
+                    return Integer.compare(p1.getValue(), p2.getValue());
+                } else {
+                    return Integer.compare(p2.getValue(), p1.getValue());
+                }
+            }
+        });
+    }
+
+    public void sortByName(String order) {
+        this.items.sort(new Comparator<Item>() {
+            @Override
+            public int compare(Item p1, Item p2) {
+                if (order.equals("ascending")) {
+                    return p1.getName().compareTo(p2.getName());
+                } else {
+                    return p2.getName().compareTo(p1.getName());
+                }
+            }
+        });
+    }
+
+    public void sortByWeight(String order) {
+        this.items.sort(new Comparator<Item>() {
+        @Override
+        public int compare(Item p1, Item p2) {
+            if (order.equals("ascending")) {
+                return Integer.compare(p1.getWeight(), p2.getWeight());
+            } else {
+                return Integer.compare(p2.getWeight(), p1.getWeight());
+            }
+        }
+    });
     }
 }
 
