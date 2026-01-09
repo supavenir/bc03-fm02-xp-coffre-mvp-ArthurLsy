@@ -2,13 +2,11 @@ package fr.caensup;
 
 import entities.Chest;
 import entities.Item;
-import exceptions.ChestException;
 import exceptions.*;
 import junit.framework.TestCase;
 
 import java.lang.Exception;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

@@ -1,5 +1,8 @@
 package entities;
 
+import exceptions.BadWeightItemException;
+import exceptions.ItemException;
+
 import java.util.UUID;
 
 public class Item {
@@ -7,20 +10,21 @@ public class Item {
     private final int value;
     private final int weight;
     private final String name;
-    private boolean rare;
+    private final boolean rare;
 
-    public Item(String name, int value, int weight, boolean rare) {
+    public Item(String name, int value, int weight, boolean rare) throws ItemException {
+        if (weight < 0) throw new BadWeightItemException();
         this.name = name;
         this.rare = rare;
         this.value =  value;
         this.weight = weight;
     }
 
-    public Item(String name, int value, int weight) {
+    public Item(String name, int value, int weight) throws ItemException {
         this(name, value, weight, false);
     }
 
-    public Item(String name) {
+    public Item(String name)  throws ItemException {
         this(name, 1, 1);
     }
 
@@ -35,6 +39,8 @@ public class Item {
     public int getWeight(){
         return this.weight;
     }
+
+
 
 
 }
